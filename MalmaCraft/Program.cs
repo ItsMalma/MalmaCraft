@@ -2,10 +2,34 @@
 {
     public class Program
     {
-        static void Main()
+        static unsafe void Init(Window window)
         {
-            using Game game = new();
-            game.Run();
+
+        }
+
+        static unsafe void Destroy(Window window)
+        {
+
+        }
+
+        static unsafe void Tick(Window window)
+        {
+
+        }
+
+        static unsafe void Update(Window window)
+        {
+
+        }
+
+        static unsafe void Render(Window window)
+        {
+
+        }
+
+        static unsafe void Main()
+        {
+            new Window(Init, Destroy, Tick, Update, Render).Run();
         }
     }
 }
