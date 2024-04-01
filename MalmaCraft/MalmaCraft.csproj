@@ -12,13 +12,4 @@
     <PackageReference Include="OpenTK" Version="4.8.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="fragment.glsl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="vertex.glsl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

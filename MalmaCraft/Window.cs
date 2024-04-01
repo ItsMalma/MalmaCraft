@@ -74,7 +74,11 @@ namespace MalmaCraft
         private Keyboard keyboard = new();
 
         private long lastSecond, frames, fps, lastFrame, frameDelta, ticks, tps, tickRemainder;
-        private WindowEventHandler init, destroy, tick, update, render;
+        private readonly WindowEventHandler init, destroy, tick, update, render;
+        private readonly GLFWCallbacks.FramebufferSizeCallback framebufferSizeCallback;
+        private readonly GLFWCallbacks.CursorPosCallback cursorPosCallback;
+        private readonly GLFWCallbacks.KeyCallback keyCallback;
+        private readonly GLFWCallbacks.MouseButtonCallback mouseButtonCallback;
 
         public Vector2i Size { get; private set; } = new(1280, 720);
         public string Title { get; private set; } = "MalmaCraft";
@@ -118,10 +122,17 @@ namespace MalmaCraft
 
             GLFW.MakeContextCurrent(handle);
 
-            GLFW.SetFramebufferSizeCallback(handle, new(OnResize));
-            GLFW.SetCursorPosCallback(handle, new(OnMouseMove));
-            GLFW.SetKeyCallback(handle, new(OnKeyPress));
-            GLFW.SetMouseButtonCallback(handle, new(OnMouseClick));
+            framebufferSizeCallback = OnResize;
+            GLFW.SetFramebufferSizeCallback(handle, framebufferSizeCallback);
+
+            cursorPosCallback = OnMouseMove;
+            GLFW.SetCursorPosCallback(handle, cursorPosCallback);
+
+            keyCallback = OnKeyPress;
+            GLFW.SetKeyCallback(handle, keyCallback);
+
+            mouseButtonCallback = OnMouseClick;
+            GLFW.SetMouseButtonCallback(handle, mouseButtonCallback);
 
             GL.LoadBindings(new GLFWBindingsContext());
 
